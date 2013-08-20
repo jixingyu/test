@@ -1,8 +1,8 @@
 test
 ====
-`
-Note: 
-  You should deny message function for guest.
-`
-
 test
+
+Note: 
+=====
+- You should deny guest to access this module by edit permissions in backend.
+
