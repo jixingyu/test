@@ -13,6 +13,8 @@ For consumer
 ============
 1. Client register
   - <host>/oauth/client/register
+    - bbb
+  - abc
 
 2. Get authorization code
   - Url: <host>/oauth/authorize/index
