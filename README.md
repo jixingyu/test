@@ -34,13 +34,13 @@ front-end
 * 1.2 **Client list:** List the clients that registered before.
 * 1.3 **Show details and edit client:** Client id and client secret can not be changed.
 * 1.4 **Submit for verification:**  Need to submit for verification after register a client. If the client is not verified, functions are limited.
-* 1.5 **Apply for scope:** 创建后的客户端拥有基本的scope（默认为base），通过审核的客户端可以申请更多地scope，scope申请需要通过管理审核
+* 1.5 **Apply for scope:** The new registered client has the scope with base functions. The application for more scopes is provided after the client is virefied.
 
-#### 2.授权服务功能
-* 1.1 **Authorization接口**
+#### 2.Authorization
+* 1.1 **Authorization api**
   * 客户端申请授权服务的主要接口。提供用户授权页面，用户确认授权后，浏览器跳转到回调地址上，并携带响应参数。
   * 访问地址：http://\<host\>/oauth/authorization/index/response_type-code/client_id-\<client_id\>/redirect_uri-\<redirect_uri\>/state-\<rand_string\>
-  * 参数：
+  * parameter：
       * response_type  ： 授权码：code；隐式授权：token
       * client_id ：注册客户端的id，确认客户端身份
       * redirect_uri : 客户端接收授权码，发起token请求的地址,需要经过两次URL转码 
