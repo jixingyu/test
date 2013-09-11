@@ -36,23 +36,23 @@ front-end
 * 1.4 **Submit for verification:**  Need to submit for verification after register a client. If the client is not verified, functions are limited.
 * 1.5 **Apply for scope:** The new registered client has the scope with base functions. The application for more scopes is provided after the client is virefied.
 
-#### 2.Authorization
-* 1.1 **Authorization api**
-  * 客户端申请授权服务的主要接口。提供用户授权页面，用户确认授权后，浏览器跳转到回调地址上，并携带响应参数。
-  * 访问地址：http://\<host\>/oauth/authorization/index/response_type-code/client_id-\<client_id\>/redirect_uri-\<redirect_uri\>/state-\<rand_string\>
-  * parameter：
-      * response_type  ： 授权码：code；隐式授权：token
-      * client_id ：注册客户端的id，确认客户端身份
-      * redirect_uri : 客户端接收授权码，发起token请求的地址,需要经过两次URL转码 
+#### 2. Authorization api for consumer
+* 1.1 **Authorize api**
+  * Used to get the url that provide the authorization service. 提供用户授权页面，用户确认授权后，浏览器跳转到回调地址上，并携带响应参数。
+  * Access url：http://\<host\>/oauth/authorize/index?response_type=\<code\>&client_id=\<client_id\>&redirect_uri=\<redirect_uri\>&state=\<rand_string\>
+  * Parameter：
+      * response_type: It's "code" if grant type is authorization_code, or "token" if grant type is implicit.
+      * client_id: Client id, used to identify a client.
+      * redirect_uri: The uri after 客户端接收授权码，发起token请求的地址,需要经过两次URL转码 
       * scope ：本次授权申请需要用户授权的范围，为空时则使用客户端申请的全部scope
       * state：随机字符串，由客户端产生，响应时作为参数原样返回 
-  * 响应内容 ： 
-      * 授权码回调： http://YOUR_REDIRECT_URI？code=CODE&state=RAND_STRING
-      * 隐式授权回调： http://YOUR_REDIRECT_URI？token=TOKEN&state=RAND_STRING
-* 1.2 **Grant接口**
-  * 客户端获取token的接口，必须使用POST请求方式访问， 访问地址：https://domain/oauth/token/index
-  * 参数：client_id=\<client_id\>&client_secret=\<client_secret\>&grant_type=authorizecode&redirect_uri=\<redirect_uri\>&code=\<authorization_code\>，其中，client_id和secret支持使用http头部的Authorization：Basic的形式传输
-  * 请求返回 ：Json格式 
+  * Redirect uri after authorization
+      * authorization_code：\<redirect_uri\>?code=\<code\>&state=\<rand_string\>
+      * implicit: ：\<redirect_uri\>?token=\<token\>&state=\<rand_string\>
+* 1.2 **Grant api**
+  * Used to get the access token. The submit method must be "post".
+  * Access url：http://\<host\>/oauth/token/index?client_id=\<client_id\>&client_secret=\<client_secret\>&grant_type=authorizecode&redirect_uri=\<redirect_uri\>&code=\<authorization_code\>
+  * Return json string
 ```
     {
       "access_token":"681e1d98fe25f973a41a011e5a784ba1",
